@@ -1,12 +1,49 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./App/App";
+import { IntlProvider } from "react-intl";
+import { Provider } from "react-redux";
+import store from "./Redux/Store";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { addLocaleData } from "react-intl";
+import locale_en from "react-intl/locale-data/en";
+import locale_de from "react-intl/locale-data/de";
+import messages_en from "./Translations/en.json";
+import messages_de from "./Translations/de.json";
 
-ReactDOM.render(<App />, document.getElementById('root'));
+addLocaleData([...locale_en, ...locale_de]);
+/* Define your default translations */
+let i18nConfig = {
+  locale: "en",
+  messages: messages_en
+};
+function callbackFunction() {}
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+// onChangeLanguage(lang) {
+//   switch (lang) {
+//       case 'DE': i18nConfig.messages = messages_de; break;
+//       case 'EN': i18nConfig.messages = messages_en; break;
+//       default: i18nConfig.messages = messages_en; break;
+//   }
+//   this.setState({ locale: lang });
+//   i18nConfig.locale = lang;
+// }
+
+// const messages = {
+//   en: messages_en,
+//   de: messages_de
+// // };
+// const language = navigator.language.split(/[-_]/)[0]; // language without region code
+// console.log("lang", language, i18nConfig.locale);
+// import locale_en from "react-intl/locale-data/en";
+
+// addLocaleData([...locale_en]);
+
+ReactDOM.render(
+  <Provider store={store}>
+    <IntlProvider locale={i18nConfig.locale} messages={i18nConfig.messages}>
+      <App parentCallback={this.callbackFunction} />
+    </IntlProvider>
+  </Provider>,
+  document.querySelector("#root")
+);
