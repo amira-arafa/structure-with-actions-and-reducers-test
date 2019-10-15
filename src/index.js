@@ -1,23 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App/App";
-import { IntlProvider } from "react-intl";
 import { Provider } from "react-redux";
 import store from "./Redux/Store";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { addLocaleData } from "react-intl";
-import locale_en from "react-intl/locale-data/en";
-import locale_de from "react-intl/locale-data/de";
-import messages_en from "./Translations/en.json";
-import messages_de from "./Translations/de.json";
-
-addLocaleData([...locale_en, ...locale_de]);
-/* Define your default translations */
-let i18nConfig = {
-  locale: "en",
-  messages: messages_en
-};
-function callbackFunction() {}
 
 // onChangeLanguage(lang) {
 //   switch (lang) {
@@ -41,9 +27,9 @@ function callbackFunction() {}
 
 ReactDOM.render(
   <Provider store={store}>
-    <IntlProvider locale={i18nConfig.locale} messages={i18nConfig.messages}>
-      <App parentCallback={this.callbackFunction} />
-    </IntlProvider>
+    {/* <IntlProvider locale={i18nConfig.locale} messages={i18nConfig.messages}> */}
+    <App />
+    {/* </IntlProvider> */}
   </Provider>,
   document.querySelector("#root")
 );
