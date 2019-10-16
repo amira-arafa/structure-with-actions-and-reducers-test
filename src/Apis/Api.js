@@ -50,7 +50,7 @@ axiosInstance.interceptors.response.use(
 export default class Api {
   static fetchData = async () => await axiosInstance.get('/posts', {handlerEnabled: false});
   static fetchSingleData = async id => await axiosInstance.get(`/posts/${id}`);
-  // static postData = async () => await axiosInstance.post(`${URL}`);
+  static postData = async (data) => await axiosInstance.post(`/posts`,data);
 }
 
 

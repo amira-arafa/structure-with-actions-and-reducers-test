@@ -11,13 +11,24 @@ import "./Header.scss";
 
 class Header extends React.Component {
   fetchData = () => {
-    this.props.fetchData();
+    const DataList=[{
+      id:1,
+      name:"Amira",
+      title:"Front-End"
+    },{
+      id:2,
+      name:"Amira brdo",
+      title:"Front-End brdo"
+    }
+  ]
+    this.props.fetchData(DataList);
   };
   fetchSingleData = () => {
     this.props.fetchSingleData(1);
   };
   postData = () => {
-    this.props.PostData();
+    const data="Amira";
+    this.props.PostData(data);
   };
   constructor(props) {
     super(props);

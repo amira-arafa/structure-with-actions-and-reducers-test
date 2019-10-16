@@ -18,22 +18,27 @@ function* test() {
   yield put({ type: TEST_ACTION });
 }
 
-function* fetchData() {
-  const response = yield call(Api.fetchData);
-  console.log("response", response);
-  yield put({ type: FETCH_DATA });
+function* fetchData(action) {
+  const {DataList}=action;
+  // const response = yield call(Api.fetchData);
+  // console.log("response", response);
+  console.log("Response from saga",DataList);
+  yield put({ type: FETCH_DATA ,payload:DataList});
 }
 function* fetchSingleData(action) {
   const { id } = action;
   const response = yield call(Api.fetchSingleData, id);
-  console.log("response", response);
-  yield put({ type: FETCH_SINGLE_DATA });
+  console.log("response", response.data);
+  yield put({ type: FETCH_SINGLE_DATA , payload:response.data });
 }
 
-function* postData() {
-  const response = yield call(Api.postData);
-  console.log("response", response);
-  yield put({ type: POST_DATA });
+function* postData(action) {
+  const {data}=action;
+  const response = yield call(Api.postData,data);
+  console.log("responseeeee", response);
+  yield put({ type: POST_DATA ,payload:response.data });
+
+ 
 }
 //-------------watchers sagas-------------
 
